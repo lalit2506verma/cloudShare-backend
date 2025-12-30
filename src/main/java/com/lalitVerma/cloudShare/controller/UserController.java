@@ -2,8 +2,10 @@ package com.lalitVerma.cloudShare.controller;
 
 import com.lalitVerma.cloudShare.dto.UserDTO;
 import com.lalitVerma.cloudShare.entities.User;
+import com.lalitVerma.cloudShare.services.UserCreditsService;
 import com.lalitVerma.cloudShare.services.UserService;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
@@ -12,13 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final UserService userService;
+    private final UserCreditsService userCreditsService;
+    private final MongoTemplate mongoTemplate;
 
     @PostConstruct
     public void logDbName() {
@@ -33,6 +34,9 @@ public class UserController {
         if(savedUser == null){
             throw new RuntimeException("User not registered");
         }
+
+        // Creating the UserCredits
+        this.userCreditsService.createInitialCredits(savedUser.getId());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
