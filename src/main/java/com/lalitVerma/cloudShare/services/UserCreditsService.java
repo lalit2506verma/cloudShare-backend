@@ -8,6 +8,11 @@ public interface UserCreditsService {
 
     UserCredits createInitialCredits(String userId);
 
-
     UserCredits getUserCredits(String email);
+
+    UserCredits getUserCredits();
+
+    boolean hasEnoughCredits(int requiredCredits);
+
+    UserCredits consumeCredit();
 }

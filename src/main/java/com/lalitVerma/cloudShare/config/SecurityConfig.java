@@ -1,5 +1,6 @@
-package com.lalitVerma.cloudShare.security;
+package com.lalitVerma.cloudShare.config;
 
+import com.lalitVerma.cloudShare.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

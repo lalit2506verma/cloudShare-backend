@@ -7,6 +7,7 @@ import com.lalitVerma.cloudShare.exception.UserNotFoundException;
 import com.lalitVerma.cloudShare.repository.UserRepository;
 import com.lalitVerma.cloudShare.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -76,10 +77,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userId) {
-        if(userRepository.existsById(userId)){
+        if (userRepository.existsById(userId)) {
             userRepository.deleteById(userId);
-        }
-        else{
+        } else {
             throw new UserNotFoundException("User with id " + userId + " does not exist");
         }
     }
@@ -99,5 +99,16 @@ public class UserServiceImpl implements UserService {
             return this.userRepository.findByEmail(email).orElse(null);
         }
         return null;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        if(SecurityContextHolder.getContext().getAuthentication() == null){
+            throw new UserNotFoundException("User not Authenticated");
+        }
+
+        String email =  SecurityContextHolder.getContext().getAuthentication().getName();
+//        System.out.println(email);
+        return this.userRepository.findByEmail(email).orElse(null);
     }
 }

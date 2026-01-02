@@ -21,4 +21,7 @@ public interface UserService {
     // Delete user
     void deleteUser(String userId);
 
+    // Get current User
+    User getCurrentUser();
+
 }
