@@ -1,8 +1,7 @@
 package com.lalitVerma.cloudShare.services.impl;
 
-import com.lalitVerma.cloudShare.dto.LoginRequestDto;
+import com.lalitVerma.cloudShare.dto.LoginRequest;
 import com.lalitVerma.cloudShare.entities.User;
-import com.lalitVerma.cloudShare.repository.UserRepository;
 import com.lalitVerma.cloudShare.security.AuthUtils;
 import com.lalitVerma.cloudShare.services.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +15,14 @@ import org.springframework.stereotype.Component;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final AuthUtils authUtils;
 
     @Override
-    public String login(LoginRequestDto loginRequestDto) {
+    public User login(LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
 
-        User user = (User) authentication.getPrincipal();
-
-        return authUtils.generateAccessToken(user);
+        return (User) authentication.getPrincipal();
     }
 }

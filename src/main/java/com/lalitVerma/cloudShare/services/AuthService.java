@@ -1,10 +1,11 @@
 package com.lalitVerma.cloudShare.services;
 
-import com.lalitVerma.cloudShare.dto.LoginRequestDto;
+import com.lalitVerma.cloudShare.dto.LoginRequest;
+import com.lalitVerma.cloudShare.entities.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface AuthService {
 
-    String login(LoginRequestDto loginRequestDto);
+    User login(LoginRequest loginRequest);
 }
