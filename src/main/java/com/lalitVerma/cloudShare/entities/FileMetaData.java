@@ -1,18 +1,22 @@
-package com.lalitVerma.cloudShare.dto;
+package com.lalitVerma.cloudShare.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Document(collection = "files")
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class UploadFileMetaDataDto {
+@Data
+public class FileMetaData {
 
+    @Id
     private String id;
     private String name;
     private String type;

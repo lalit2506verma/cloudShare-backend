@@ -26,7 +26,7 @@ public class UserController {
         System.out.println("Connected MongoDB Database: " + mongoTemplate.getDb().getName());
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user){
         System.out.println(user);
         UserDTO savedUser = this.userService.createUser(user);
