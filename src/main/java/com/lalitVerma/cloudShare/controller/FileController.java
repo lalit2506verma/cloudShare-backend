@@ -39,7 +39,7 @@ public class FileController {
         UserCredits finalCredits = this.userCreditsService.getUserCredits();
 
         map.put("files", list);
-        map.put("remaining Credits",finalCredits.getCredits());
+        map.put("remainingCredits",finalCredits.getCredits());
 
         return ResponseEntity.ok(map);
     }
