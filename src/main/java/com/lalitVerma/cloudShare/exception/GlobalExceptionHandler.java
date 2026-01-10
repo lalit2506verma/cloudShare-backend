@@ -1,5 +1,7 @@
 package com.lalitVerma.cloudShare.exception;
 
+import com.lalitVerma.cloudShare.dto.PaymentDTO;
+import com.razorpay.RazorpayException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
@@ -97,6 +99,32 @@ public class GlobalExceptionHandler {
     }
     /**
      * AUTHENTICATION RELATED EXCEPTION - END
+     */
+
+    /**
+     * PAYMENT RELATED EXCEPTION: RAZORPAY - START
+     */
+
+    @ExceptionHandler(RazorpayException.class)
+    public PaymentDTO handleRazorpayException(RazorpayException ex) {
+        log.warn("Razorpay exception: {}", ex.getMessage());
+        return PaymentDTO.builder()
+                .success(false)
+                .message("Razorpay Exception")
+                .build();
+    }
+
+    @ExceptionHandler(PaymentFailedException.class)
+    public PaymentDTO handlePaymentFailedException(PaymentFailedException ex) {
+        log.warn("Payment failed exception: {}", ex.getMessage());
+        return PaymentDTO.builder()
+                .success(false)
+                .message("Payment Failed Exception")
+                .build();
+    }
+
+    /**
+     * PAYMENT RELATED EXCEPTION: RAZORPAY - END
      */
 
     @ExceptionHandler(Exception.class)

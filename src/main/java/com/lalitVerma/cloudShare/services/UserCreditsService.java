@@ -8,7 +8,9 @@ public interface UserCreditsService {
 
     UserCredits createInitialCredits(String userId);
 
-    UserCredits getUserCredits(String email);
+    UserCredits addCredits(String userId, Integer creditsToAdd, String subscriptionPlan);
+
+    UserCredits getUserCredits(String userId);
 
     UserCredits getUserCredits();
 

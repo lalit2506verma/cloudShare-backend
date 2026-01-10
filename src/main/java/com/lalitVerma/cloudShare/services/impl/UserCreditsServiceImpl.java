@@ -5,6 +5,7 @@ import com.lalitVerma.cloudShare.repository.UserCreditsRepository;
 import com.lalitVerma.cloudShare.services.UserCreditsService;
 import com.lalitVerma.cloudShare.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,6 +25,19 @@ public class UserCreditsServiceImpl implements UserCreditsService {
                 .build();
 
         return this.userCreditsRepository.save(userCredits);
+    }
+
+    @Override
+    public UserCredits addCredits(String userId, Integer creditsToAdd, String subscriptionPlan) {
+        UserCredits currentUserCredits = this.userCreditsRepository.findByUserId(userId)
+                .orElseGet(() -> this.createInitialCredits(userId));
+
+        // Updating the credits
+        currentUserCredits.setCredits(currentUserCredits.getCredits() + creditsToAdd);
+        currentUserCredits.setSubscriptionPlan(subscriptionPlan);
+
+        return this.userCreditsRepository.save(currentUserCredits);
+
     }
 
     @Override
