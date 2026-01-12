@@ -52,7 +52,7 @@ public class FileController {
     }
 
     @GetMapping("/public/{id}")
-    public ResponseEntity<?> getPublicFil(@PathVariable String id) {
+    public ResponseEntity<?> getPublicFile(@PathVariable String id) {
         FileMetaDataDTO fileMetaData = this.fileMetaDataService.getPublicFile(id);
         return ResponseEntity.ok(fileMetaData);
     }
