@@ -3,6 +3,13 @@
 CloudShare Backend is a **Spring Boot–based backend service** that powers the CloudShare file-sharing application.  
 It provides **secure authentication, file management, and payment-based credit handling** using RESTful APIs.
 
+## 🔗 Related Repository
+
+This backend service is used by the CloudShare frontend application:
+
+➡️ **Frontend Repository:**  
+[https://github.com/lalit2506verma/cloudShare-frontend](https://github.com/lalit2506verma/CloudShare)
+
 ---
 
 ## 🚀 Features
